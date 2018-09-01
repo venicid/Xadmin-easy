@@ -1,0 +1,8 @@
+.active {
+    color: red !important;
+}
+
+.filter a {
+    text-decoration: none;
+    color: grey;
+}

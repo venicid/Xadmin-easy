@@ -4,9 +4,8 @@ from .models import *
 from django.forms import ModelForm
 
 class AuthorConfig(stark.ModelStark):
-    list_display = ['nid', 'name', 'age']
-    list_display_links = ['name','age']
-
+    list_display = ['nid','name', 'age']
+    list_display_links = ['name']
 
 class BookModelForm(ModelForm):
     class Meta:
@@ -19,7 +18,6 @@ class BookModelForm(ModelForm):
         }
 
 class BookConfig(stark.ModelStark):
-    # list_display = ['title', 'price','publish','authors']
     list_display = ['__str__',]
     list_display_links = ['title']
     modelform_class = BookModelForm
@@ -30,8 +28,6 @@ class BookConfig(stark.ModelStark):
     def patch_init(self,request,queryset):
         queryset.update(price=111)
 
-        # return HttpResponse("批量初始化OK")
-
     patch_init.short_description = "批量初始化"
 
     actions = [patch_init]
@@ -41,12 +37,3 @@ stark.site.register(Book,BookConfig)
 stark.site.register(Publish)
 stark.site.register(Author,AuthorConfig)
 stark.site.register(AuthorDetail)
-
-# print(stark.site._registry)
-
-"""
-{<class 'app01.models.Book'>: <stark.service.stark.ModelStark object at 0x0000003AA7439630>,
-<class 'app01.models.Publish'>: <stark.service.stark.ModelStark object at 0x0000003AA7439668>,
-<class 'app01.models.Author'>: <stark.service.stark.ModelStark object at 0x0000003AA74396A0>,
-<class 'app01.models.AuthorDetail'>: <stark.service.stark.ModelStark object at 0x0000003AA7439940>}
-"""

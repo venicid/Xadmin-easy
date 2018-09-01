@@ -9,7 +9,6 @@
 
 <script>
     //pop页面返回到上一个页面的数据
-{#    window.opener.pop_response();#}
     window.opener.pop_response('{{ res.pk }}','{{ res.text }}','{{ res.pop_res_id }}');
 
     window.close();

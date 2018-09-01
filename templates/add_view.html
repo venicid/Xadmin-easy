@@ -1,64 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    <title>add页面</title>
-{% endblock %}
-
-
-{% block css %}
-    <style type="text/css">
-        input, select {
-            display: block;
-            width: 100%;
-            height: 34px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        }
-
-        .error {
-            color: red;
-        }
-    </style>
-{% endblock %}
-
-{% block header %}
-    <h3>add页面</h3>
-{% endblock %}
-
 {% block content %}
     <div class="col-md-6 col-xs-8 col-md-offset-4">
         {% include 'form.html' %}
     </div>
 
-
-{% endblock %}
-
-{% block javascript %}
     <script type="text/javascript">
         //打开open页面
         function pop(url) {
             window.open(url, '', 'width=600,height=400,left=100,right=100')
         }
         //open页面操作完成，返回数据
-        function pop_response(pk,text,id) {
+        function pop_response(pk, text, id) {
             //选择哪一个select标签
             // option的文本值与value值
-            var $option =$('<option>');     //<option></option>
+            var $option = $('<option>');     //<option></option>
             $option.html(text);  //<option>南京出版社</option>
             $option.val(pk);       //<option val=111>南京出版社</option>
-            $option.attr("selected","selected");       //<option val=111 selected>南京出版社</option>
-            $('#'+id).append($option)
+            $option.attr("selected", "selected");       //<option val=111 selected>南京出版社</option>
+            $('#' + id).append($option)
         }
     </script>
 {% endblock %}

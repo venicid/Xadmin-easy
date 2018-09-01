@@ -1,95 +1,89 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    <title>list页面</title>
-{% endblock %}
-
-{% block css %}
-    <style type="text/css">
-        .active {
-            color: red !important;
-        }
-
-        .filter a {
-            text-decoration: none;
-            color: grey;
-        }
-    </style>
-{% endblock %}
 {% block content %}
-    <div class="col-md-9">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
 
-        <a class="btn btn-primary" href="{{ add_url }}">添加数据</a>
+                <a class="btn btn-primary" href="{{ add_url }}">添加数据</a>
 
-        {% if show_list.config.search_fields %}
-            <form action="" method="get">
-                <input type="text" class="form-control" style="width: 30%;display: inline-block;margin-top: 8px"
-                       name="q"
-                       value="{{ show_list.config.key_word }}">
-                <button class="btn btn-success">submit</button>
-            </form>
-        {% endif %}
-
-
-        <form action="" method="post">
-            {% csrf_token %}
-            <select name="action" class="form-control"
-                    style="display: inline-block;width: 200px;margin: 8px 8px 8px 0;height: 35px;vertical-align: -2px">
-                <option value="">-------</option>
-                {% for item in show_list.get_action_list %}
-                    <option value="{{ item.name }}">{{ item.desc }}</option>
-                {% endfor %}
-            </select>
-            <button type="submit" class="btn btn-primary">Go</button>
+                {% if show_list.config.search_fields %}
+                    <form action="" method="get">
+                        <input type="text" class="form-control" style="width: 30%;display: inline-block;margin-top: 8px"
+                               name="q"
+                               value="{{ show_list.config.key_word }}">
+                        <button class="btn btn-success">submit</button>
+                    </form>
+                {% endif %}
 
 
-            <table class="table table-bordered table-striped">
-                <tr>
-                    {% for header in show_list.get_header %}
-                        <th>{{ header }}</th>
-                    {% endfor %}
-                </tr>
-
-                {% for data in show_list.get_body %}
-                    <tr>
-                        {% for item in data %}
-                            <td>{{ item }}</td>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <select name="action" class="form-control"
+                            style="display: inline-block;width: 200px;margin: 8px 8px 8px 0;height: 35px;vertical-align: -2px">
+                        <option value="">-------</option>
+                        {% for item in show_list.get_action_list %}
+                            <option value="{{ item.name }}">{{ item.desc }}</option>
                         {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Go</button>
 
-                    </tr>
-                {% endfor %}
-            </table>
-        </form>
 
-        <nav>
-            <ul class="pagination">
-                {{ show_list.pagination.page_html|safe }}
-            </ul>
-        </nav>
-    </div>
-    <div class="col-md-3">
-        <div class="filter">
-            {% for filter_field, linktags in show_list.get_filter_linktags.items %}
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            {% for header in show_list.get_header %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
 
-                <div class="well">
-                    <p>{{ filter_field.upper }}</p>
+                        {% for data in show_list.get_body %}
+                            <tr>
+                                {% for item in data %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
 
-                    {% for link in linktags %}
-                        <p>{{ link|safe }}</p>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </form>
+
+                <nav>
+                    <ul class="pagination">
+                        {{ show_list.pagination.page_html|safe }}
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-3">
+
+
+                <div class="filter">
+
+                    {% if show_list.get_filter_linktags %}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                FILTER
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% for filter_field, linktags in show_list.get_filter_linktags.items %}
+
+                        <div class="well">
+                            <p>{{ filter_field.upper }}</p>
+
+                            {% for link in linktags %}
+                                <p>{{ link|safe }}</p>
+                            {% endfor %}
+
+                        </div>
+
                     {% endfor %}
 
                 </div>
-
-            {% endfor %}
-
+            </div>
         </div>
     </div>
-{% endblock %}
 
-
-
-
-{% block javascript %}
     <script type="text/javascript">
         $('#choice').click(function () {
             if ($(this).prop('checked')) {   //对象自身属性中是否具有指定的属性
@@ -99,6 +93,7 @@
             }
         })
     </script>
+
 {% endblock %}
 
 

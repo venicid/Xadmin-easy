@@ -2,33 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block title %}
-        <title>Title</title>
-    {% endblock %}
-
+    <title>Title</title>
     <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.css">
     <script src="/static/jQuery/jquery-3.2.1.min.js"></script>
-    {% block css %}
-
-    {% endblock %}
+    <link rel="stylesheet" href="/static/css/list_view.css">
+    <link rel="stylesheet" href="/static/css/add_view.css">
 </head>
-
 <body>
-<div class="container">
-    <div class="row">
-        {% block header %}
-
-        {% endblock %}
-
-
-        {% block content %}
-
-        {% endblock %}
-
-
-    </div>
-</div>
-{% block javascript %}
+{% block content %}
 
 {% endblock %}
 </body>

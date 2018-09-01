@@ -1,7 +1,6 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import *
+
 
 class BookConfig(admin.ModelAdmin):
     list_display = ['title','price']
@@ -16,6 +15,7 @@ class BookConfig(admin.ModelAdmin):
     patch_init.short_description = "批量初始化"
 
     actions = [patch_init]
+
 
 admin.site.register(Book,BookConfig)
 admin.site.register(Author)
